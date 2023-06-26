@@ -16,6 +16,7 @@ type Entry interface {
 
 func newEntry(path string) Entry {
 	if strings.Contains(path, pathListSeparator) {
+		// TODO 这个功能感觉效率很低下啊，记得优化一下
 		return newCompositeEntry(path)
 	}
 	if strings.HasSuffix(path, "*") {

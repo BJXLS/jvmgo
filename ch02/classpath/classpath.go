@@ -1,9 +1,10 @@
 package classpath
 
 import (
+	"fmt"
 	"os"
+	"path/filepath"
 )
-import "path/filepath"
 
 type Classpath struct {
 	bootClasspath Entry
@@ -14,7 +15,7 @@ type Classpath struct {
 // Parse 使用jreOption解析启动类路径和扩展类路径
 func Parse(jreOption, cpOption string) *Classpath {
 	cp := &Classpath{}
-	// 这里用启动和扩展类去加载jre
+	// 这里用启动和扩展类去加载jre（也就是这一步包含了前面的两个路径的读取）
 	cp.parseBootAndExtClasspath(jreOption)
 	// 用用户启动
 	cp.parseUserClasspath(cpOption)
@@ -23,6 +24,7 @@ func Parse(jreOption, cpOption string) *Classpath {
 
 func (self *Classpath) parseBootAndExtClasspath(jreOption string) {
 	jreDir := getJreDir(jreOption)
+	fmt.Printf("Jre Dir: %v", jreDir)
 	jreLibPath := filepath.Join(jreDir, "lib", "*")
 	self.bootClasspath = newWildcardEntry(jreLibPath)
 	jreExtPath := filepath.Join(jreDir, "lib", "ext", "*")

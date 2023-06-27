@@ -1,9 +1,12 @@
 package classpath
 
-import "os"
-import "path/filepath"
-import "strings"
+import (
+	"os"
+	"path/filepath"
+	"strings"
+)
 
+// 函数式编程，遍历当前路径所有文件
 func newWildcardEntry(path string) CompositeEntry {
 	baseDir := path[:len(path)-1] // 去除*
 	compositeEntry := []Entry{}

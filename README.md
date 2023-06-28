@@ -13,3 +13,8 @@
 ## 问题
 * 什么是函数式编程
 * go的interface的使用
+### ch03
+* P100 关于decodeMUTF8方法的完整版记得实现，当前是简易版（不含null和补充字符）
+* utf8的类型存储的是什么？它的存储和string常量有什么区别？
+  * CONSTANT_String_info本身不存放字符串数据，只存了常量池索引，这个索引指向一个一个utf8常量
+* class文件中所有的具体值都是存在常量池中，其他的包括string，class都是存常量池索引

@@ -13,7 +13,7 @@
 ### 常量池总结
 可以把常量池中的常量分为两类：字面量（literal）和符号引用（symbolic reference）。字面量包括数字常量和字符串常量，符号引
 用包括类和接口名、字段和方法信息等。除了字面量，其他常量都是通过索引直接或间接指向CONSTANT_Utf8_info常量
-
+![img.png](imgs/img-ch03-01.png)
 ## 问题
 * 什么是函数式编程
 * go的interface的使用
@@ -24,3 +24,6 @@
 * class文件中所有的具体值都是存在常量池中，其他的包括string_Info，class_info都是存常量池索引
 * class_info 存的具体值
 * 需要实现ch03\cp_invoke_dynamic.go P112
+* 类文件中的属性是什么？用来做什么？
+  * 要把P120左右的全部属性含义，以及会出现的地方进行学习
+  * 什么是字节码？和.class文件不同吗?

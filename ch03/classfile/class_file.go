@@ -17,7 +17,9 @@ type ClassFile struct {
 	attributes   []AttributeInfo
 }
 
+// 将[]byte解析成ClassFile结构体
 func Parse(classData []byte) (cf *ClassFile, err error) {
+	// 异常回调
 	defer func() {
 		if r := recover(); r != nil {
 			var ok bool
@@ -34,9 +36,13 @@ func Parse(classData []byte) (cf *ClassFile, err error) {
 }
 
 func (self *ClassFile) read(reader *ClassReader) {
+	// 按照当前顺序读取字节码，可以在这里打进度
 	self.readAndCheckMagic(reader)
+	fmt.Println("finish readAndCheckMagic...")
 	self.readAndCheckVersion(reader)
+	fmt.Println("finish readAndCheckVersion...")
 	self.constantPool = readConstantPool(reader)
+	fmt.Println("finish readConstantPool...")
 	self.accessFlags = reader.readUint16()
 	self.thisClass = reader.readUint16()
 	self.superClass = reader.readUint16()
@@ -44,6 +50,7 @@ func (self *ClassFile) read(reader *ClassReader) {
 	self.fields = readMembers(reader, self.constantPool)
 	self.methods = readMembers(reader, self.constantPool)
 	self.attributes = readAttributes(reader, self.constantPool)
+	fmt.Println("finish parse classfile...")
 }
 
 func (self *ClassFile) MajorVersion() uint16 {

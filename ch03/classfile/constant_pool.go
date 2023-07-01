@@ -1,11 +1,16 @@
 package classfile
 
+// import "fmt"
+
+// ConstantPool就是ConstantInfo组成的数组
 type ConstantPool []ConstantInfo
 
 func readConstantPool(reader *ClassReader) ConstantPool {
 	cpCount := int(reader.readUint16())
+	// fmt.Printf("ConstantPool count: %v\n", cpCount)
 	cp := make([]ConstantInfo, cpCount)
 	for i := 1; i < cpCount; i++ {
+		// fmt.Printf("ConstantInfo index: %v ", i)
 		cp[i] = readConstantInfo(reader, cp)
 		switch cp[i].(type) {
 		case *ConstantLongInfo, *ConstantDoubleInfo: // 这两种类型，占两个位置

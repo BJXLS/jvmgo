@@ -1,7 +1,8 @@
 package classfile
 
-// tag 常量值定义
+// import "fmt"
 
+// tag 常量值定义
 const (
 	CONSTANT_Class              = 7
 	CONSTANT_Fieldref           = 9
@@ -25,6 +26,7 @@ type ConstantInfo interface {
 
 func readConstantInfo(reader *ClassReader, cp ConstantPool) ConstantInfo {
 	tag := reader.readUint8()
+	// fmt.Printf("tag: %v\n", tag)
 	c := newConstantInfo(tag, cp)
 	c.readInfo(reader)
 	return c
@@ -50,6 +52,8 @@ func newConstantInfo(tag uint8, cp ConstantPool) ConstantInfo {
 		return &ConstantFieldrefInfo{ConstantMemberrefInfo{cp: cp}}
 	case CONSTANT_Methodref:
 		return &ConstantMethodrefInfo{ConstantMemberrefInfo{cp: cp}}
+	case CONSTANT_InterfaceMethodref:
+		return &ConstantInterfaceMethodrefInfo{ConstantMemberrefInfo{cp: cp}}
 	case CONSTANT_NameAndType:
 		return &ConstantNameAndTypeInfo{}
 	case CONSTANT_MethodType:

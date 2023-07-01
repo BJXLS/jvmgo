@@ -24,7 +24,7 @@ func Parse(jreOption, cpOption string) *Classpath {
 
 func (self *Classpath) parseBootAndExtClasspath(jreOption string) {
 	jreDir := getJreDir(jreOption)
-	fmt.Printf("Jre Dir: %v", jreDir)
+	fmt.Printf("Jre Dir: %v\n", jreDir)
 	jreLibPath := filepath.Join(jreDir, "lib", "*")
 	self.bootClasspath = newWildcardEntry(jreLibPath)
 	jreExtPath := filepath.Join(jreDir, "lib", "ext", "*")

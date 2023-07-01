@@ -14,6 +14,7 @@
 可以把常量池中的常量分为两类：字面量（literal）和符号引用（symbolic reference）。字面量包括数字常量和字符串常量，符号引
 用包括类和接口名、字段和方法信息等。除了字面量，其他常量都是通过索引直接或间接指向CONSTANT_Utf8_info常量
 ![img.png](imgs/img-ch03-01.png)
+![Alt text](imgs/img-ch03-02.png)
 ## 问题
 * 什么是函数式编程
 * go的interface的使用

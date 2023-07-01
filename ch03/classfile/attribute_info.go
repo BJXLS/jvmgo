@@ -43,6 +43,6 @@ func newAttributeInfo(attrName string, attrLen uint32, cp ConstantPool) Attribut
 	case "Synthetic":
 		return &SyntheticAttribute{}
 	default:
-		return &UnparseAttribute{attrName, attrLen, nil}
+		return &UnparsedAttribute{attrName, attrLen, nil}
 	}
 }

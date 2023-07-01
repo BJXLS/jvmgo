@@ -1,10 +1,9 @@
 package classfile
 
-import (
-	"bytes"
-	"fmt"
-	"unicode/utf16"
-)
+// import (
+// 	"fmt"
+// 	"unicode/utf16"
+// )
 
 type ConstantUtf8Info struct {
 	str string

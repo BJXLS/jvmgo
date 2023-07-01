@@ -1,7 +1,6 @@
 package classfile
 
 import (
-	"bytes"
 	"math"
 )
 

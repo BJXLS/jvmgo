@@ -50,12 +50,32 @@ func (self *ClassFile) MajorVersion() uint16 {
 	return self.majorVersion
 }
 
+func (self *ClassFile) MinorVersion() uint16 {
+	return self.minorVersion
+}
+
+func (self *ClassFile) ConstantPool() ConstantPool {
+	return self.constantPool
+}
+
+func (self *ClassFile) AccessFlags() uint16 {
+	return self.accessFlags
+}
+
+func (self *ClassFile) Fields() []*MemberInfo {
+	return self.fields
+}
+
 func (self *ClassFile) ThisClass() uint16 {
 	return self.thisClass
 }
 
 func (self *ClassFile) SuperClass() uint16 {
 	return self.superClass
+}
+
+func (self *ClassFile) Methods() []*MemberInfo {
+	return self.methods
 }
 
 func (self *ClassFile) ClassName() string {
@@ -72,7 +92,7 @@ func (self *ClassFile) SuperClassName() string {
 // InterfaceNames 从常量池查找接口名
 func (self *ClassFile) InterfaceNames() []string {
 	interfaceNames := make([]string, len(self.interfaces))
-	for interfaceNames, cpIndex := range self.interfaces {
+	for i, cpIndex := range self.interfaces {
 		interfaceNames[i] = self.constantPool.getClassName(cpIndex)
 	}
 	return interfaceNames

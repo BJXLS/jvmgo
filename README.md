@@ -28,3 +28,4 @@
   * 要把P120左右的全部属性含义，以及会出现的地方进行学习
   * 什么是字节码？和.class文件不同吗?
   * SourceFile属性是做什么用的？
+* localVariableTableAttribute

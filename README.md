@@ -13,8 +13,12 @@
 ### 常量池总结
 可以把常量池中的常量分为两类：字面量（literal）和符号引用（symbolic reference）。字面量包括数字常量和字符串常量，符号引
 用包括类和接口名、字段和方法信息等。除了字面量，其他常量都是通过索引直接或间接指向CONSTANT_Utf8_info常量
-![img.png](imgs/img-ch03-01.png)
 ![Alt text](imgs/img-ch03-02.png)
+### 此章代码逻辑
+1. 先通过Ch02编写的ReadClass()将Class文件内容读取并保存
+2. 再使用ClassFile.Parse()进行内容解析
+3. 将ClassData赋值到ClassReader（对位的封装）
+4. 再使用ClassFile的read进行读取，本质就是根据每个属性内容的固定长度进行读取。
 ## 问题
 * 什么是函数式编程
 * go的interface的使用

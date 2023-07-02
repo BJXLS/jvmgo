@@ -14,6 +14,8 @@
 可以把常量池中的常量分为两类：字面量（literal）和符号引用（symbolic reference）。字面量包括数字常量和字符串常量，符号引
 用包括类和接口名、字段和方法信息等。除了字面量，其他常量都是通过索引直接或间接指向CONSTANT_Utf8_info常量
 ![Alt text](imgs/img-ch03-02.png)
+## Ch04
+![Alt text](imgs/img-ch04-01.png)
 ### 此章代码逻辑
 1. 先通过Ch02编写的ReadClass()将Class文件内容读取并保存
 2. 再使用ClassFile.Parse()进行内容解析
@@ -34,3 +36,6 @@
   * 什么是字节码？和.class文件不同吗?
   * SourceFile属性是做什么用的？
 * localVariableTableAttribute
+### ch04
+* 浮点数有什么细节？需要具体了解一下。
+* 

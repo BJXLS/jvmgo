@@ -14,20 +14,22 @@
 可以把常量池中的常量分为两类：字面量（literal）和符号引用（symbolic reference）。字面量包括数字常量和字符串常量，符号引
 用包括类和接口名、字段和方法信息等。除了字面量，其他常量都是通过索引直接或间接指向CONSTANT_Utf8_info常量
 ![Alt text](imgs/img-ch03-02.png)
-## Ch04
-![Alt text](imgs/img-ch04-01.png)
 ### 此章代码逻辑
 1. 先通过Ch02编写的ReadClass()将Class文件内容读取并保存
 2. 再使用ClassFile.Parse()进行内容解析
 3. 将ClassData赋值到ClassReader（对位的封装）
 4. 再使用ClassFile的read进行读取，本质就是根据每个属性内容的固定长度进行读取。
+
+## Ch04
+![Alt text](imgs/img-ch04-01.png)
+本章就是实现了部分Java运行时数据结构，下一张会进行具体使用。
 ## 问题
 * 什么是函数式编程
 * go的interface的使用
 ### ch03
 * P100 关于decodeMUTF8方法的完整版记得实现，当前是简易版（不含null和补充字符）
 * utf8的类型存储的是什么？它的存储和string常量有什么区别？
-  * CONSTANT_String_info本身不存放字符串数据，只存了常量池索引，这个索引指向一个一个utf8常量
+  * CONSTANT_String_info本身不存放字符[README.md](README.md)串数据，只存了常量池索引，这个索引指向一个一个utf8常量
 * class文件中所有的具体值都是存在常量池中，其他的包括string_Info，class_info都是存常量池索引
 * class_info 存的具体值
 * 需要实现ch03\cp_invoke_dynamic.go P112
@@ -38,4 +40,5 @@
 * localVariableTableAttribute
 ### ch04
 * 浮点数有什么细节？需要具体了解一下。
-* 
+* 操作数栈中为什么要将float变量先转成int类型，然后再按int变量处理？
+* stack的PopLong原理是什么？那个|是什么意思？

@@ -72,3 +72,15 @@ func (self *OperandStack) PopRef() *Object {
 	self.slots[self.size].ref = nil // 为了帮助Go的垃圾收集器回收Object结构体实例
 	return ref
 }
+
+// PushSlot 栈的push
+func (self *OperandStack) PushSlot(slot Slot) {
+	self.slots[self.size] = slot
+	self.size++
+}
+
+// PopSlot 栈的弹出
+func (self *OperandStack) PopSlot() Slot {
+	self.size--
+	return self.slots[self.size]
+}

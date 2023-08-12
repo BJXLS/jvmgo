@@ -37,6 +37,7 @@ func (self *MemberInfo) AccessFlags() uint16 {
 	return self.accessFlags
 }
 
+// Descriptor 通过index来读取constant pool里的信息
 func (self *MemberInfo) Descriptor() string {
 	return self.cp.getUtf8(self.descriptorIndex)
 }

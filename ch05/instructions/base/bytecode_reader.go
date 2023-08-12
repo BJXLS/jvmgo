@@ -5,7 +5,7 @@ type BytecodeReader struct {
 	pc   int    // 表示读到了哪个字节
 }
 
-// 避免重复创建，设置复用函数
+// Reset 避免重复创建，设置复用函数
 func (self *BytecodeReader) Reset(code []byte, pc int) {
 	self.code = code
 	self.pc = pc
@@ -52,4 +52,8 @@ func (self *BytecodeReader) ReadInt32s(n int32) []int32 {
 		ints[i] = self.ReadInt32()
 	}
 	return ints
+}
+
+func (self *BytecodeReader) PC() int {
+	return self.pc
 }

@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
-	"jvmgo/ch05/rtda"
+	"jvmgo/ch05/classfile"
+	"jvmgo/ch05/classpath"
+	"strings"
 )
 
 func main() {
@@ -17,43 +19,42 @@ func main() {
 }
 
 func startJVM(cmd *Cmd) {
-	frame := rtda.NewFrame(100, 100)
-	testLocalVars(frame.LocalVars())
-	testOperandStack(frame.OperandStack())
+	// 解析参数
+	cp := classpath.Parse(cmd.XjreOption, cmd.cpOption)
+	className := strings.Replace(cmd.class, ".", "/", -1)
+	// 读取并解析class文件
+	cf := loadClass(className, cp)
+	// 查找main方法
+	mainMethod := getMainMethod(cf)
+	if mainMethod != nil {
+		// 执行方法
+		interpret(mainMethod)
+	} else {
+		fmt.Printf("Main method not found in class %s\n", cmd.class)
+	}
 }
 
-// 测试局部变量
-func testLocalVars(vars rtda.LocalVars) {
-	vars.SetInt(0, 100)
-	vars.SetInt(1, -100)
-	vars.SetLong(2, 2997924580)
-	vars.SetLong(4, -2997924580)
-	vars.SetFloat(6, 3.1415926)
-	vars.SetDouble(7, 2.71828182845)
-	vars.SetRef(9, nil)
-	println(vars.GetInt(0))
-	println(vars.GetInt(1))
-	println(vars.GetLong(2))
-	println(vars.GetLong(4))
-	println(vars.GetFloat(6))
-	println(vars.GetDouble(7))
-	println(vars.GetRef(9))
+func loadClass(className string, cp *classpath.Classpath) *classfile.ClassFile {
+	// 读取类
+	classData, _, err := cp.ReadClass(className)
+	if err != nil {
+		panic(err)
+	}
+	// 解析类
+	cf, err := classfile.Parse(classData)
+	if err != nil {
+		panic(err)
+	}
+	return cf
 }
 
-// 测试操作数栈（打印出来看一看效果）
-func testOperandStack(ops *rtda.OperandStack) {
-	ops.PushInt(100)
-	ops.PushInt(-100)
-	ops.PushLong(2997924580)
-	ops.PushLong(-2997924580)
-	ops.PushFloat(3.1415926)
-	ops.PushDouble(2.71828182845)
-	ops.PushRef(nil)
-	println(ops.PopRef())
-	println(ops.PopDouble())
-	println(ops.PopFloat())
-	println(ops.PopLong())
-	println(ops.PopLong())
-	println(ops.PopInt())
-	println(ops.PopInt())
+func getMainMethod(cf *classfile.ClassFile) *classfile.MemberInfo {
+	// 变了methodInfo寻找叫main的方法
+	// [L代表一维数组；V表示void；()内的是输入参数，多个参数用;隔开
+	for _, m := range cf.Methods() {
+		if m.Name() == "main" && m.Descriptor() == "([Ljava/lang/String;)V" {
+			return m
+		}
+	}
+	return nil
 }

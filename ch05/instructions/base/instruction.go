@@ -7,21 +7,21 @@ type Instruction interface {
 	Execute(frame *rtda.Frame)            // 执行指令逻辑
 }
 
-// 表示没有操作数的指令
+// NoOperandsInstruction 表示没有操作数的指令
 type NoOperandsInstruction struct {
 }
 
-// 表示跳转指令
+// BranchInstruction 表示跳转指令
 type BranchInstruction struct {
 	Offset int
 }
 
-// 存储和加载指令，通过索引读取局部变量表
+// Index8Instruction 存储和加载指令，通过索引读取局部变量表
 type Index8Instruction struct {
 	Index uint // 局部变量表中的index
 }
 
-// 抽象访问运行时常量池的操作
+// Index16Instruction 抽象访问运行时常量池的操作
 type Index16Instruction struct {
 	Index uint
 }

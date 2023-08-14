@@ -1,9 +1,7 @@
 package main
 
-import (
-	"fmt"
-	"jvmgo/ch06/rtda/heap"
-)
+import "fmt"
+import "jvmgo/ch06/rtda/heap"
 import "jvmgo/ch06/instructions"
 import "jvmgo/ch06/instructions/base"
 import "jvmgo/ch06/rtda"

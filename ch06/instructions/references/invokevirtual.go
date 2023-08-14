@@ -5,7 +5,7 @@ import "jvmgo/ch06/instructions/base"
 import "jvmgo/ch06/rtda"
 import "jvmgo/ch06/rtda/heap"
 
-// Invoke instance method; dispatch based on class
+// INVOKE_VIRTUAL TODO 不太懂 Invoke instance method; dispatch based on class
 type INVOKE_VIRTUAL struct{ base.Index16Instruction }
 
 // hack!

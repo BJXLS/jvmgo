@@ -69,7 +69,7 @@ func (self *Class) StaticVars() Slots {
 }
 
 func (self *Class) GetMainMethod() *Method {
-	return self.getStaticMethod("main", "([Ljava/lang/String;)V)")
+	return self.getStaticMethod("main", "([Ljava/lang/String;)V")
 }
 
 func (self *Class) getStaticMethod(name, descriptor string) *Method {
